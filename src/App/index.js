@@ -1,36 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import JournalCard from '../components/JournalCard';
+import { getMayJournal } from '../helpers/data/journalData';
+import JournalForm from '../JournalForm';
 import './App.scss';
 
 function App() {
-  const [domWriting, setDomWriting] = useState('Nothing Here!');
+  const [journal, setJournal] = useState([]);
 
-  const handleClick = (e) => {
-    console.warn(`You clicked ${e.target.id}`);
-    setDomWriting(`You clicked ${e.target.id}! Check the Console!`);
-  };
+  useEffect(() => {
+    getMayJournal().then((response) => setJournal(response));
+  }, []);
+
+  console.warn(journal);
 
   return (
-    <div className='App'>
-      <h2>INSIDE APP COMPONENT</h2>
-      <div>
-        <button
-          id='this-button'
-          className='btn btn-info'
-          onClick={handleClick}
-        >
-          I am THIS button
-        </button>
-      </div>
-      <div>
-        <button
-          id='that-button'
-          className='btn btn-primary mt-3'
-          onClick={handleClick}
-        >
-          I am THAT button
-        </button>
-      </div>
-      <h3>{domWriting}</h3>
+    <div className='App container'>
+      <JournalForm
+        setJournal={setJournal}
+      />
+      {journal.map((info) => (
+        <JournalCard key={info.firebasekey}
+          firebasekey={info.firebasekey}
+          date={info.date}
+          comments={info.comments}
+          setJournal={setJournal}
+        />
+      ))}
     </div>
   );
 }
