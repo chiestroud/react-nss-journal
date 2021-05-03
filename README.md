@@ -1,7 +1,9 @@
-# React Template
+# NSS-Journal using React
 
-**Use this template to get up and running quickly on projects.**
+My NSS-Journal website started since I joined NSS Evening Cohort (E14). Every month I try to implement different things to make writing journal fun.
+Starting May, I am using React to update my journal.
 
-This is just like the webpack template. Use it, create the repo, connect it to your local and `npm i`.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/34149576-a938-4e9e-b752-9b9c8fa95b13/deploy-status)](https://app.netlify.com/sites/cs-nss-journal-react/deploys)
 
-- [Steps to deploy](https://github.com/nss-nightclass-projects/REACT-Deployment-Netlify)
+Deployed Site:
+https://cs-nss-journal-react.netlify.app
