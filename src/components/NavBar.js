@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText
+  NavbarText,
+  Button
 } from 'reactstrap';
+import { signInUser, signOutUser } from '../helpers/auth';
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -22,7 +24,7 @@ const NavBar = () => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">NSS Journal 2021</NavbarBrand>
+        <Link className='navbar-brand' to="/">NSS Journal 2021</Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -39,12 +41,21 @@ const NavBar = () => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
+            {
+              !user
+                ? <Button color='info' onClick={signInUser}>Sign In</Button>
+                : <Button color='danger' onClick={signOutUser}>Log Out</Button>
+            }
           </Nav>
           <NavbarText>Welcome</NavbarText>
         </Collapse>
       </Navbar>
     </div>
   );
+};
+
+NavBar.propTypes = {
+  user: PropTypes.any
 };
 
 export default NavBar;
