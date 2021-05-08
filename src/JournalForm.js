@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import {
   Form, FormGroup, Label, Input, Button
 } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
 import { addMayJournal, updateJournal } from './helpers/data/journalData';
 
 export default function JournalForm({
-  setJournal, date, firebasekey, comments
+  setJournal, date, firebasekey, comments, uid, user
 }) {
   const [mayJournal, setMayJournal] = useState({
     date: date || '',
     comments: comments || '',
-    firebasekey: firebasekey || null
+    firebasekey: firebasekey || null,
+    uid: uid || user.uid
   });
 
   const handleInputChange = (e) => {
@@ -21,12 +23,16 @@ export default function JournalForm({
     }));
   };
 
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (mayJournal.firebasekey) {
       updateJournal(mayJournal).then((journalArray) => setJournal(journalArray));
+      history.push('/may');
     } else {
       addMayJournal(mayJournal).then((journalArray) => setJournal(journalArray));
+      history.push('/may');
     }
   };
 
@@ -66,5 +72,7 @@ JournalForm.propTypes = {
   setJournal: PropTypes.func,
   firebasekey: PropTypes.string,
   comments: PropTypes.string,
-  date: PropTypes.any
+  date: PropTypes.any,
+  uid: PropTypes.string,
+  user: PropTypes.any
 };

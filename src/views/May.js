@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'reactstrap';
+import PropTypes from 'prop-types';
 import JournalCard from '../components/JournalCard';
 import { getMayJournal } from '../helpers/data/journalData';
 import JournalForm from '../JournalForm';
 
-export default function May() {
+export default function May({ user }) {
   const [journal, setJournal] = useState([]);
   const [showButton, setShowButton] = useState(false);
 
@@ -22,7 +23,8 @@ export default function May() {
       <Button color='info' className='m-2' onClick={handleClick}>{showButton !== true ? 'Add Journal' : 'Close Form'}</Button>
       {showButton === true
         && <JournalForm
-            setJournal={setJournal}
+        setJournal={setJournal}
+        user={user}
           />}
       {journal.map((info) => (
         <JournalCard key={info.firebasekey}
@@ -30,8 +32,14 @@ export default function May() {
           date={info.date}
           comments={info.comments}
           setJournal={setJournal}
+          user={user}
+          uid={info.uid}
         />
       ))}
     </div>
   );
 }
+
+May.propTypes = {
+  user: PropTypes.any
+};

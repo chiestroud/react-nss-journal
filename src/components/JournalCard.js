@@ -7,12 +7,15 @@ import { deleteJournal } from '../helpers/data/journalData';
 import JournalForm from '../JournalForm';
 
 const JournalCard = ({
+  user,
   date,
   comments,
   setJournal,
-  firebasekey
+  firebasekey,
+  uid
 }) => {
   const [editing, setEditing] = useState(false);
+  console.warn(uid);
 
   const handleClick = (type) => {
     switch (type) {
@@ -29,18 +32,26 @@ const JournalCard = ({
   };
 
   return (
-    <Card body className='card'>
+    <div className="journalCard">
+    <Card body className='card' key={firebasekey} id={uid}>
       <CardTitle tag="h5">{date}</CardTitle>
       <CardText>Comments: {comments}</CardText>
-      <Button color='danger' onClick={() => handleClick('delete')}>Delete Journal</Button>
-      <Button color='success' onClick={() => handleClick('edit')}>{editing ? 'Close' : 'Edit Journal'}</Button>
-      {editing && <JournalForm
-        setJournal={setJournal}
-        firebasekey={firebasekey}
-        date={date}
-        comments={comments}
-      />}
-    </Card>
+      {user.uid === uid
+        && <div>
+          <Button color='danger' onClick={() => handleClick('delete')}>Delete Journal</Button>
+          <Button color='success' onClick={() => handleClick('edit')}>{editing ? 'Close' : 'Edit Journal'}</Button>
+          {editing && <JournalForm
+            setJournal={setJournal}
+            firebasekey={firebasekey}
+            date={date}
+            comments={comments}
+            uid={uid}
+            user={user}
+          />}
+        </div>
+      }
+     </Card>
+    </div>
   );
 };
 
@@ -48,7 +59,9 @@ JournalCard.propTypes = {
   date: PropTypes.any.isRequired,
   comments: PropTypes.string.isRequired,
   firebasekey: PropTypes.string,
-  setJournal: PropTypes.func
+  setJournal: PropTypes.func,
+  user: PropTypes.any,
+  uid: PropTypes.string
 };
 
 export default JournalCard;
