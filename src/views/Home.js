@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 export default function Home({ user }) {
   return (
-    <div>
+    <div className='main'>
       { user
-        ? <div>
+        ? <div className='profileCard'>
           <header>Hello {user.fullName}</header>
           <img src={user.profileImage} className='profileImage' />
           <p>Welcome to my Journal Page</p>
