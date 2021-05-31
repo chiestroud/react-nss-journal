@@ -4,6 +4,7 @@ import {
   Card, CardText, CardBody,
   CardTitle, Button
 } from 'reactstrap';
+import { LinkPreview } from '@dhaiwat10/react-link-preview';
 import { deleteJuneJournal } from '../helpers/data/juneJournal';
 import JuneJournalForm from '../JuneJournalForm';
 
@@ -27,12 +28,13 @@ const JuneCard = ({
   };
 
   return (
-    <div>
-      <Card key={firebasekey}>
+    <div className='flexCard'>
+      <Card key={firebasekey} className="juneCard">
         <CardBody>
           <CardTitle tag="h5">{date}</CardTitle>
           <CardText>{comments}</CardText>
-          <CardText>{link}</CardText>
+          <CardText>
+            <LinkPreview url={link} /></CardText>
           {(user && user.uid === uid) && <div>
             <Button onClick={() => handleClick('edit')}>{editing ? 'Close Form' : 'Edit'}</Button>
             <Button onClick={() => handleClick('delete')}>Delete</Button>

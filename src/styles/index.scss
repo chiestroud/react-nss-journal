@@ -25,3 +25,14 @@ body {
 .profileCard {
   text-align: center;
 }
+
+.flexCard {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.juneCard {
+  width: 50%;
+}
