@@ -25,9 +25,14 @@ const NavBar = ({ user }) => {
     <div>
       <Navbar color="light" light expand="md">
         <Link className='navbar-brand' to="/">NSS Journal 2021</Link>
-        <NavbarToggler onClick={toggle} />
+        {user
+          && <div>
+          <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
+            <NavItem>
+              <Link className='nav-link' to="/june">June</Link>
+            </NavItem>
             <NavItem>
               <Link className='nav-link' to="/may">May</Link>
             </NavItem>
@@ -41,14 +46,16 @@ const NavBar = ({ user }) => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-            {
+            </Nav>
+            </Collapse>
+        </div>
+          }
+          {
               !user
                 ? <Button color='info' onClick={signInUser}>Sign In</Button>
                 : <Button color='danger' onClick={signOutUser}>Log Out</Button>
-            }
-          </Nav>
-          <NavbarText>Welcome</NavbarText>
-        </Collapse>
+        }
+        <NavbarText>Welcome</NavbarText>
       </Navbar>
     </div>
   );
