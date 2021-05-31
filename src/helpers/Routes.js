@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Home from '../views/Home';
 import JanApr from '../views/JanApp';
 import May from '../views/May';
+import June from '../views/June';
 
 const PrivateRoute = ({ component: Component, user, ...rest }) => {
   const routeChecker = (taco) => (user
@@ -25,6 +26,10 @@ export default function Routes({ user }) {
           path='/may'
           user={user}
           component={May} />
+         <PrivateRoute
+          path='/june'
+          user={user}
+          component={June} />
         <PrivateRoute
           path='/jan-apr'
           user={user}
