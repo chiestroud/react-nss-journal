@@ -19,7 +19,7 @@ export default function JournalForm({
   const handleInputChange = (e) => {
     setMayJournal((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value === 'select' ? e.target.selected : e.target.value
     }));
   };
 

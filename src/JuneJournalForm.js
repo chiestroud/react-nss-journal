@@ -7,14 +7,15 @@ import { addJuneJournal, updateJuneJournal } from './helpers/data/juneJournal';
 import getCurrentUserUid from './userData';
 
 export default function JournalForm({
-  setOpenForm, setJuneJournals, date, comments, link, firebasekey
+  setOpenForm, setJuneJournals, date, comments, link, firebasekey, select
 }) {
   const [juneJournal, setJuneJournal] = useState({
     date: date || '',
     comments: comments || '',
     firebasekey: firebasekey || null,
     link: link || '',
-    uid: getCurrentUserUid()
+    uid: getCurrentUserUid(),
+    select: select || ''
   });
 
   const handleInputChange = (e) => {
@@ -64,6 +65,19 @@ export default function JournalForm({
         />
       </FormGroup>
       <FormGroup>
+        <Label for="select">Select Category</Label>
+        <Input
+          type="select"
+          name="select"
+          id="select"
+          value={juneJournal.select}
+          onChange={handleInputChange}
+        >
+          <option>Read</option>
+          <option>Write</option>
+        </Input>
+      </FormGroup>
+      <FormGroup>
         <Label for="exampleText">Comments</Label>
         <Input
           type="textarea"
@@ -84,5 +98,6 @@ JournalForm.propTypes = {
   comments: PropTypes.string,
   date: PropTypes.any,
   link: PropTypes.string,
-  firebasekey: PropTypes.string
+  firebasekey: PropTypes.string,
+  select: PropTypes.string
 };

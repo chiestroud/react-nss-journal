@@ -9,7 +9,7 @@ import { deleteJuneJournal } from '../helpers/data/juneJournal';
 import JuneJournalForm from '../JuneJournalForm';
 
 const JuneCard = ({
-  date, comments, firebasekey, uid, link, user, setJuneJournals, setOpenForm
+  date, comments, firebasekey, uid, link, user, setJuneJournals, setOpenForm, select
 }) => {
   const [editing, setEditing] = useState(false);
 
@@ -47,6 +47,7 @@ const JuneCard = ({
               link={link}
               uid={uid}
               user={user}
+              select={select}
             />}
           </div>}
         </CardBody>
@@ -63,7 +64,8 @@ JuneCard.propTypes = {
   link: PropTypes.string.isRequired,
   user: PropTypes.any,
   setJuneJournals: PropTypes.func,
-  setOpenForm: PropTypes.func
+  setOpenForm: PropTypes.func,
+  select: PropTypes.string
 };
 
 export default JuneCard;
