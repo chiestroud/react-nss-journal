@@ -32,9 +32,27 @@ const updateJuneJournal = (journal) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
+const searchJuneJournal = (searchValue) => new Promise((resolve, reject) => {
+  getJuneJournal().then((juneArray) => {
+    const searchItems = juneArray.filter((s) => s.comments.toLowerCase().includes(searchValue));
+    resolve(searchItems);
+  })
+    .catch((err) => reject(err));
+});
+
+const searchJuneCategoryJournal = (searchValue) => new Promise((resolve, reject) => {
+  getJuneJournal().then((juneArray) => {
+    const searchItems = juneArray.filter((s) => s.select.includes(searchValue));
+    resolve(searchItems);
+  })
+    .catch((err) => reject(err));
+});
+
 export {
   getJuneJournal,
   addJuneJournal,
   deleteJuneJournal,
-  updateJuneJournal
+  updateJuneJournal,
+  searchJuneJournal,
+  searchJuneCategoryJournal
 };
