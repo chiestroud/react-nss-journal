@@ -29,7 +29,10 @@ const NavBar = ({ user }) => {
           && <div>
           <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+            <Nav className="mr-auto" navbar>
+            <NavItem>
+              <Link className='nav-link' to="/july">July</Link>
+            </NavItem>
             <NavItem>
               <Link className='nav-link' to="/june">June</Link>
             </NavItem>
